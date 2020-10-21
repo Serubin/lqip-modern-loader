@@ -56,6 +56,33 @@ module.exports = {
 };
 ```
 
+## with Next.js
+add the following to your `next.config.js` at the root of the project:
+
+```js
+module.exports = {
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(git|png|jpe?g)$/i,
+      loaders: ['lqip-modern-loader'],
+    });
+
+    return config
+  },
+}
+```
+
+### if you are using Next.js with typescript
+
+you need to add a reference to `lqip-modern-loader` types into your next-env.d.ts file
+
+```
+/// <reference types="next" />
+/// <reference types="next/types/global" />
+ 
++ /// <reference types="lqip-modern-loader" />
+```
+
 [npm]: https://img.shields.io/npm/v/lqip-modern-loader.svg
 [npm-url]: https://npmjs.com/package/lqip-modern-loader
 [lqip-modern]: https://www.npmjs.com/package/lqip-modern
