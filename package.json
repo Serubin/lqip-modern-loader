@@ -1,0 +1,40 @@
+{
+  "name": "lqip-modern-loader",
+  "version": "0.0.2",
+  "description": "A Webpack loader for lqip-modern, loads images and generates a tiny lqip image either in \"jpeg\" or \"webp\" format.",
+  "main": "lib",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elia-Darwish/lqip-modern-loader.git"
+  },
+  "keywords": [
+    "lqip",
+    "lqip-modern",
+    "lqip-modern-loader",
+    "loader"
+  ],
+  "author": "Elia Darwish",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Elia-Darwish/lqip-modern-loader/issues"
+  },
+  "homepage": "https://github.com/Elia-Darwish/lqip-modern-loader#readme",
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2"
+  },
+  "dependencies": {
+    "loader-utils": "^2.0.0",
+    "lqip-modern": "^1.1.3"
+  }
+}
