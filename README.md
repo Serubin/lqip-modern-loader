@@ -20,7 +20,7 @@ the `lqip-modern-loader` will load the image imports that have the `lqip` query 
 
 
 ```js
-import { width, height, dataURI } from './image.jpg?lqip';
+import { src, width, height, dataURI } from './image.jpg?lqip';
 ```
 
 by default, the loader will return the placeholder in `jpeg` format for maximum browser support.
@@ -28,16 +28,17 @@ it is however possible to switch to `webp` using the `webp` query param
 
 
 ```js
-import { width, height, dataURI } from './image.jpg?lqip&webp';
+import image from './image.jpg?lqip&webp';
 ```
 
 the import will return the following:
 
 ```ts
 {
-  width: number;
-  height: number;
-  dataURI: string;
+  src: string; // the source of the original image (using file-loader in the background)
+  width: number; // the width of the placeholder image
+  height: number; // the height of the placeholder image
+  dataURI: string; // the placeholder image Base64-URI
 }
 ```
 
@@ -55,6 +56,26 @@ module.exports = {
   }
 };
 ```
+
+it can also be used together with `url-loader` or `file-loader`, just make sure it runs last 😉
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+          'lqip-modern-loader',
+          'url-loader'
+        ],
+      }
+    ]
+  }
+};
+```
+
+in this case, the result of the `url-loader` or `file-loader` will be included in the `src` prop.
 
 ## with Next.js
 add the following to your `next.config.js` at the root of the project:
@@ -82,6 +103,8 @@ you need to add a reference to `lqip-modern-loader` types into your next-env.d.t
  
 + /// <reference types="lqip-modern-loader" />
 ```
+
+> the package doesn't seem to integrate well with `next-images`, but I'm working on a fix! 😬
 
 [npm]: https://img.shields.io/npm/v/lqip-modern-loader.svg
 [npm-url]: https://npmjs.com/package/lqip-modern-loader
