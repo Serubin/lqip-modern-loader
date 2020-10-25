@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -37,3 +37,74 @@ The source of the original image is now included in the return type
   dataURI: string; // the placeholder image Base64-URI
 }
 ```
+
+# 0.0.6
+
+### you can now set the size of the placeholder image
+
+by setting **size** to a **number**, it will set the width and height of the
+placeholder image to a maximum of the provided number while maintaining the
+aspect ratio.
+
+example:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+          {
+            loader: 'lqip-modern-loader',
+            options: {
+              size: 32,
+            },
+          },
+          'url-loader',
+        ],
+      },
+    ],
+  },
+}
+// an example output would be
+{
+  src: '...', //image source
+  width: 16, // placeholder width
+  height: 32, // placeholder height
+  dataURI: '...', // placeholder image URI
+}
+```
+
+and by setting **size** to an **Array of numbers**, you can specify the width and
+height of the placeholder image.
+
+example:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+          {
+            loader: 'lqip-modern-loader',
+            options: {
+              size: [32, 32],
+            },
+          },
+          'url-loader',
+        ],
+      },
+    ],
+  },
+}
+// an example output would be
+{
+  src: '...', //image source
+  width: 32, // placeholder width
+  height: 32, // placeholder height
+  dataURI: '...', // placeholder image URI
+}
+```
