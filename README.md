@@ -40,8 +40,7 @@ import image from './image.jpg?lqip&webp'
 
 commonly, a blur is added to the image placeholder using `css` for better looks.
 the scale is used here together with an `overflow: hidden` on the parent to hide
-the
-[artifacts around the edges](http://volkerotto.net/2014/07/03/css-background-image-blur-without-blury-edges/)
+the [artifacts around the edges](http://volkerotto.net/2014/07/03/css-background-image-blur-without-blury-edges/)
 
 ```css
 .placeholder {
@@ -78,7 +77,7 @@ to get an array of the dominant colors to use as a placeholder instead, simply
 add the **?colors** query param at the end of your imported image
 
 ```js
-import { src, width, height, colors } from './image.jpg?lqip'
+import { src, width, height, colors } from './image.jpg?colors'
 ```
 
 in this case, the returned values will be like following:
