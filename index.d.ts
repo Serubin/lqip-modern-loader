@@ -207,7 +207,7 @@ declare module '*.jpg?colors' {
   export default value
 }
 
-declare module '*.jpeg?lqip' {
+declare module '*.jpeg?colors' {
   export const src: string
   export const width: number
   export const height: number
@@ -216,7 +216,7 @@ declare module '*.jpeg?lqip' {
   export default value
 }
 
-declare module '*.png?lqip' {
+declare module '*.png?colors' {
   export const src: string
   export const width: number
   export const height: number
@@ -225,7 +225,7 @@ declare module '*.png?lqip' {
   export default value
 }
 
-declare module '*.webp?lqip' {
+declare module '*.webp?colors' {
   export const src: string
   export const width: number
   export const height: number
