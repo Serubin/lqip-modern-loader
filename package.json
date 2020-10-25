@@ -1,6 +1,6 @@
 {
   "name": "lqip-modern-loader",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "A Webpack loader for lqip-modern, loads images and generates a tiny lqip image either in \"jpeg\" or \"webp\" format.",
   "main": "lib",
   "directories": {
@@ -35,8 +35,9 @@
   },
   "dependencies": {
     "file-loader": "*",
+    "get-image-colors": "^4.0.0",
     "loader-utils": "^2.0.0",
-    "lqip-modern": "^1.1.3",
-    "schema-utils": "^3.0.0"
+    "schema-utils": "^3.0.0",
+    "sharp": "^0.26.2"
   }
 }

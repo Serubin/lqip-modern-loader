@@ -2,8 +2,9 @@
 
 # lqip-modern Loader
 
-A Webpack loader for [lqip-modern][lqip-modern], loads images and generates a
-low quality image to use as a placeholder either in `jpeg` or `webp` format.
+A Webpack loader used for either generating a low quality image in `jpeg` or
+`webp` format, or an array of the dominant colors, to use as a placeholder while
+the image loads
 
 > if you are using **Next.js** you should check out our
 > [next-lqip-images][next-lqip-images] Plugin.
@@ -20,22 +21,47 @@ yarn add --dev lqip-modern-loader
 
 ## Usage
 
-the `lqip-modern-loader` will load the image imports that have the `lqip` query
-param and generate a low quality image placeholder
+### lqip
+
+the `lqip-modern-loader` will load the image imports that have the **?lqip**
+query param and generate a low quality image placeholder
 
 ```js
 import { src, width, height, dataURI } from './image.jpg?lqip'
 ```
 
 by default, the loader will return the placeholder in `jpeg` format for maximum
-browser support. it is however possible to switch to `webp` using the `webp`
-query param
+browser support. it is however possible to switch to `webp` using the **&webp**
+query param, which will result in a much smaller image size
 
 ```js
 import image from './image.jpg?lqip&webp'
 ```
 
-the import will return the following:
+commonly, a blur is added to the image placeholder using `css` for better looks.
+the scale is used here together with an `overflow: hidden` on the parent to hide
+the
+[artifacts around the edges](http://volkerotto.net/2014/07/03/css-background-image-blur-without-blury-edges/)
+
+```css
+.placeholder {
+  filter: blur(24px);
+  transform: scale(1.1);
+}
+```
+
+to avoid going throw that, you can just simply add the **&blur** query param to
+get a blurred placeholder image by default.
+
+```js
+import image from './image.jpg?lqip&webp&blur'
+import image2 from './image.png?lqip&blur'
+```
+
+> **Note:** the query params are composable but the `lqip` must be added at the
+> beginning!
+
+the above mentioned imports will return the following:
 
 ```ts
 {
@@ -43,6 +69,26 @@ the import will return the following:
   width: number // the width of the placeholder image
   height: number // the height of the placeholder image
   dataURI: string // the placeholder image Base64-URI
+}
+```
+
+### color palette
+
+to get an array of the dominant colors to use as a placeholder instead, simply
+add the **?colors** query param at the end of your imported image
+
+```js
+import { src, width, height, colors } from './image.jpg?lqip'
+```
+
+in this case, the returned values will be like following:
+
+```ts
+{
+  src: string // the source of the original image (using file-loader in the background)
+  width: number // the width of the original image
+  height: number // the height of the original image
+  colors: string[] // an array of the hex color codes representing the dominant colors of the image
 }
 ```
 
@@ -150,6 +196,37 @@ module.exports = {
   width: 32, // placeholder width
   height: 32, // placeholder height
   dataURI: '...', // placeholder image URI
+}
+```
+
+### blur
+
+`default: 2.4`
+
+you can also set the amount of blur you want to be applied to the images. I
+found that deviding the size by 10 is a good point to start with!
+
+example:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+          {
+            loader: 'lqip-modern-loader',
+            options: {
+              size: 32,
+              blur: 3.2,
+            },
+          },
+          'url-loader',
+        ],
+      },
+    ],
+  },
 }
 ```
 
